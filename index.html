@@ -3,108 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Welcome to My Website</title>
+<title>Robux Lottery Game</title>
 <style>
     body {
-        font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+        background-image: url('background.jpg'); /* Adjust the path to your background image */
+        background-size: cover;
+        background-position: center;
+        color: #fff;
     }
 
     header {
-        background-color: #333;
-        color: #fff;
+        background-color: rgba(0, 0, 0, 0.5);
         padding: 20px;
         text-align: center;
     }
 
     h1 {
         margin: 0;
+        font-size: 36px;
+    }
+
+    p {
+        font-size: 18px;
+        margin-top: 10px;
     }
 
     .container {
         max-width: 600px;
         margin: 20px auto;
         padding: 20px;
-        background-color: #fff;
+        background-color: rgba(255, 255, 255, 0.7);
         border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     }
 
-    #game-result {
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-
-    #email-form {
-        display: none;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 10px;
-    }
-
-    input[type="text"],
-    input[type="password"],
-    input[type="submit"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-
-    input[type="submit"] {
-        background-color: #333;
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        background-color: #007bff;
         color: #fff;
-        cursor: pointer;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+        background-color: #0056b3;
     }
 </style>
 </head>
 <body>
 <header>
-    <h1>Welcome to My Website</h1>
-    <p>Play our simple game and win a prize!</p>
+    <h1>Welcome to the Robux Lottery Game!</h1>
+    <p>Participate now for a chance to win Robux!</p>
 </header>
 
 <div class="container">
-    <div id="game-result">
-        Click the button to play the game!
-    </div>
-    <button onclick="playGame()">Play Game</button>
-
-    <div id="email-form">
-        <h2>Congratulations!</h2>
-        <p>You won the game!</p>
-        <p>Please enter your email and password to claim your prize:</p>
-        <form action="submit.php" method="post">
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+    <p>This is your chance to win Robux in our exciting lottery game. Simply click the button below to join the game!</p>
+    <a href="lottery.html" class="button">Join Now</a>
 </div>
 
 <script>
-    function playGame() {
-        // Generate a random number between 0 and 1
-        const randomNumber = Math.random();
-
-        // Check if the random number is greater than 0.5 to simulate winning
-        if (randomNumber > 0.5) {
-            // If the player wins, show the email form
-            document.getElementById('game-result').innerText = 'Congratulations! You won!';
-            document.getElementById('email-form').style.display = 'block';
-        } else {
-            // If the player loses, inform them to try again
-            document.getElementById('game-result').innerText = 'Sorry, you didn\'t win. Try again!';
-        }
-    }
+    // JavaScript code for the lottery game can be added here
+    // You can include the playGame() function and other related functions
+    // from the previous example here
 </script>
+
 </body>
 </html>
