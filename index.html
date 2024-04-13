@@ -78,6 +78,7 @@
     }
 
     .spin-button {
+        display: none;
         position: absolute;
         bottom: 20px;
         left: 50%;
@@ -100,48 +101,44 @@
 
     .highlight {
         color: #00ff00;
-        font-size: 24px;
-        margin-bottom: 10px;
+        font-size: 32px;
+        margin-bottom: 20px;
     }
 
-    .numbers {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
+    .options {
+        text-align: center;
+        margin-top: 20px;
     }
 
-    .number {
-        position: absolute;
-        top: calc(100vh * var(--y));
-        left: calc(100vw * var(--x));
-        color: #00ff00;
-        font-size: 12px;
-        opacity: 0.3;
-        animation: drift 5s linear infinite alternate;
+    .option-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 10px;
     }
 
-    @keyframes drift {
-        from {
-            transform: translateY(0) translateX(0);
-        }
-        to {
-            transform: translateY(calc(var(--dy) * 10px)) translateX(calc(var(--dx) * 10px));
-        }
+    .option-button:hover {
+        background-color: #0056b3;
     }
 </style>
 </head>
 <body>
+<div class="options">
+    <button class="option-button" onclick="startGame(true)">Play Game</button>
+    <button class="option-button" onclick="startGame(false)">Don't Play</button>
+</div>
 <div class="container">
-    <div class="wheel-container">
+    <div class="wheel-container" id="wheel1">
         <div class="highlight">Wheel 1</div>
         <div class="title">Best Quality Engineer:</div>
         <div class="name">Tomasz Czornik</div>
         <div class="wheel"></div>
     </div>
-    <div class="wheel-container">
+    <div class="wheel-container" id="wheel2">
         <div class="highlight">Wheel 2</div>
         <div class="title">Best Sick Leaver:</div>
         <div class="name">Chris Burmeister</div>
@@ -151,35 +148,25 @@
 <button class="spin-button" onclick="spinWheel()">Spin</button>
 <div class="result" id="result"></div>
 
-<!-- Hacker-style numbers -->
-<div class="numbers">
-    <!-- Generate random numbers -->
-    <script>
-        for (let i = 0; i < 100; i++) {
-            const number = document.createElement('div');
-            number.classList.add('number');
-            number.style.setProperty('--x', Math.random());
-            number.style.setProperty('--y', Math.random());
-            number.style.setProperty('--dx', Math.random() - 0.5);
-            number.style.setProperty('--dy', Math.random() - 0.5);
-            number.textContent = Math.floor(Math.random() * 10);
-            document.body.appendChild(number);
-        }
-    </script>
-</div>
-
 <script>
-    function spinWheel() {
-        const wheels = document.querySelectorAll('.wheel');
-        wheels.forEach(wheel => {
-            wheel.style.animation = 'spin 4s infinite linear';
-        });
-        setTimeout(() => {
-            wheels.forEach(wheel => {
-                wheel.style.animation = 'none';
+    function startGame(play) {
+        if (play) {
+            document.querySelectorAll('.option-button').forEach(button => {
+                button.style.display = 'none';
             });
-            calculateResult();
-        }, 4000); // Adjust the duration to match the spin animation duration
+            document.querySelector('.spin-button').style.display = 'block';
+            document.querySelectorAll('.wheel').forEach(wheel => {
+                wheel.style.animation = 'spin 4s infinite linear';
+            });
+            setTimeout(() => {
+                document.querySelectorAll('.wheel').forEach(wheel => {
+                    wheel.style.animation = 'none';
+                });
+                calculateResult();
+            }, 4000); // Adjust the duration to match the spin animation duration
+        } else {
+            alert("That's okay. Maybe next time!");
+        }
     }
 
     function calculateResult() {
