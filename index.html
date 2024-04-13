@@ -3,54 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox Profile: HONIG8859</title>
+    <title>Number Guessing Game</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-image: url('blank-aesthetic-baby-blue-d96rl6znedooufh3.webp');
-            background-size: cover;
-            background-position: center;
-            color: white;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        h1 {
             text-align: center;
         }
-        .profile-info {
+        #result {
+            font-size: 1.5rem;
             margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .profile-info img {
-            width: 150px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-        p {
-            text-align: center;
-            line-height: 1.6;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Roblox Profile: HONIG8859</h1>
-        <div class="profile-info">
-            <img src="Screenshot%202024-04-13%20231926.png" alt="Roblox Avatar">
-            <p>HONIG8859 is an avid Roblox player, known for their creativity and skill in various games.</p>
-            <p>They have been active on Roblox since [Join Date].</p>
-            <p>Feel free to connect with them and explore the Roblox universe together!</p>
-        </div>
-    </div>
+    <h1>Number Guessing Game</h1>
+    <p>Guess a number between 1 and 100:</p>
+    <input type="text" id="guessInput">
+    <button onclick="checkGuess()">Guess</button>
+    <p id="result"></p>
+
+    <script>
+        // Generate a random number between 1 and 100
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guessInput').value);
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                alert("Please enter a valid number between 1 and 100.");
+                return;
+            }
+
+            attempts++;
+
+            if (guess === randomNumber) {
+                document.getElementById('result').innerHTML = `Congratulations! You guessed the correct number ${randomNumber} in ${attempts} attempts.`;
+                document.getElementById('result').style.color = 'green';
+                document.getElementById('guessInput').setAttribute('disabled', 'disabled');
+            } else if (guess < randomNumber) {
+                document.getElementById('result').innerHTML = "Try a higher number.";
+                document.getElementById('result').style.color = 'red';
+            } else {
+                document.getElementById('result').innerHTML = "Try a lower number.";
+                document.getElementById('result').style.color = 'red';
+            }
+        }
+    </script>
 </body>
 </html>
