@@ -13,7 +13,9 @@
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        background-color: #f1f1f1;
+        background-color: #0f0f0f;
+        color: #00ff00;
+        font-family: monospace;
     }
 
     .container {
@@ -27,10 +29,12 @@
         position: relative;
         width: 300px;
         height: 300px;
-        background-color: #fff;
+        background-color: #000;
         border-radius: 50%;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
         overflow: hidden;
+        padding: 20px;
+        text-align: center;
     }
 
     .wheel {
@@ -49,7 +53,7 @@
         transform: translateX(-50%);
         width: 3px;
         height: 50%;
-        background-color: #000;
+        background-color: #00ff00;
         z-index: 2;
     }
 
@@ -61,7 +65,7 @@
         transform: translate(-50%, -50%);
         width: 100%;
         height: 100%;
-        background-image: radial-gradient(circle, #fff 20%, transparent 20%);
+        background-image: radial-gradient(circle, #000 20%, transparent 20%);
         background-repeat: repeat;
         background-position: 0 0;
         animation: spin 4s infinite linear;
@@ -93,23 +97,76 @@
         color: white;
         font-size: 20px;
     }
+
+    .highlight {
+        color: #00ff00;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .numbers {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .number {
+        position: absolute;
+        top: calc(100vh * var(--y));
+        left: calc(100vw * var(--x));
+        color: #00ff00;
+        font-size: 12px;
+        opacity: 0.3;
+        animation: drift 5s linear infinite alternate;
+    }
+
+    @keyframes drift {
+        from {
+            transform: translateY(0) translateX(0);
+        }
+        to {
+            transform: translateY(calc(var(--dy) * 10px)) translateX(calc(var(--dx) * 10px));
+        }
+    }
 </style>
 </head>
 <body>
 <div class="container">
     <div class="wheel-container">
-        <div class="wheel"></div>
+        <div class="highlight">Wheel 1</div>
         <div class="title">Best Quality Engineer:</div>
         <div class="name">Tomasz Czornik</div>
+        <div class="wheel"></div>
     </div>
     <div class="wheel-container">
-        <div class="wheel"></div>
-        <div class="title">Most Sick Leave Days:</div>
+        <div class="highlight">Wheel 2</div>
+        <div class="title">Best Sick Leaver:</div>
         <div class="name">Chris Burmeister</div>
+        <div class="wheel"></div>
     </div>
 </div>
 <button class="spin-button" onclick="spinWheel()">Spin</button>
 <div class="result" id="result"></div>
+
+<!-- Hacker-style numbers -->
+<div class="numbers">
+    <!-- Generate random numbers -->
+    <script>
+        for (let i = 0; i < 100; i++) {
+            const number = document.createElement('div');
+            number.classList.add('number');
+            number.style.setProperty('--x', Math.random());
+            number.style.setProperty('--y', Math.random());
+            number.style.setProperty('--dx', Math.random() - 0.5);
+            number.style.setProperty('--dy', Math.random() - 0.5);
+            number.textContent = Math.floor(Math.random() * 10);
+            document.body.appendChild(number);
+        }
+    </script>
+</div>
 
 <script>
     function spinWheel() {
