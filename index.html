@@ -3,59 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Long HTML Page</title>
+    <title>Tic Tac Toe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .board {
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .row {
+            clear: both;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            float: left;
+            border: 1px solid #333;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-size: 3em;
+            line-height: 100px;
+            text-align: center;
+        }
+        .cell:hover {
+            background-color: #f0f0f0;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+    </style>
 </head>
 <body>
+    <h1>Tic Tac Toe</h1>
+    <div class="board" id="board">
+        <div class="row">
+            <div class="cell" onclick="makeMove(0, 0)" id="cell-0"></div>
+            <div class="cell" onclick="makeMove(0, 1)" id="cell-1"></div>
+            <div class="cell" onclick="makeMove(0, 2)" id="cell-2"></div>
+        </div>
+        <div class="row">
+            <div class="cell" onclick="makeMove(1, 0)" id="cell-3"></div>
+            <div class="cell" onclick="makeMove(1, 1)" id="cell-4"></div>
+            <div class="cell" onclick="makeMove(1, 2)" id="cell-5"></div>
+        </div>
+        <div class="row">
+            <div class="cell" onclick="makeMove(2, 0)" id="cell-6"></div>
+            <div class="cell" onclick="makeMove(2, 1)" id="cell-7"></div>
+            <div class="cell" onclick="makeMove(2, 2)" id="cell-8"></div>
+        </div>
+    </div>
+    <div class="message" id="message"></div>
 
-<!-- Header -->
-<header>
-    <h1>This is a Long HTML Page</h1>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
-</header>
+    <script>
+        let currentPlayer = 'X';
+        let board = ['', '', '', '', '', '', '', '', ''];
+        const winCombinations = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+            [0, 4, 8], [2, 4, 6] // Diagonals
+        ];
 
-<!-- Main Content -->
-<main>
-    <section>
-        <h2>Section 1</h2>
-        <p>This is the first section of our long HTML page. It contains some random content to make the page longer.</p>
-        <!-- Repeat content to make the page longer -->
-        <p>This is the first section of our long HTML page. It contains some random content to make the page longer.</p>
-        <p>This is the first section of our long HTML page. It contains some random content to make the page longer.</p>
-    </section>
-    <section>
-        <h2>Section 2</h2>
-        <p>This is the second section of our long HTML page. It also contains some random content to increase the length of the page.</p>
-        <!-- Repeat content to make the page longer -->
-        <p>This is the second section of our long HTML page. It also contains some random content to increase the length of the page.</p>
-        <p>This is the second section of our long HTML page. It also contains some random content to increase the length of the page.</p>
-    </section>
-    <!-- Repeat sections to make the page longer -->
-    <section>
-        <h2>Section 3</h2>
-        <p>This is another section of our long HTML page. It's just here to make the page longer.</p>
-    </section>
-    <section>
-        <h2>Section 4</h2>
-        <p>This is yet another section of our long HTML page. Adding more sections makes the page even longer.</p>
-    </section>
-    <!-- Repeat sections to make the page longer -->
-    <section>
-        <h2>Section 5</h2>
-        <p>This is one more section of our long HTML page. The more sections, the longer the page becomes.</p>
-    </section>
-</main>
+        function makeMove(row, col) {
+            const cellId = `cell-${row * 3 + col}`;
+            const cell = document.getElementById(cellId);
 
-<!-- Footer -->
-<footer>
-    <p>&copy; 2024 Long HTML Page. All rights reserved.</p>
-</footer>
+            if (board[row * 3 + col] === '' && !checkWinner()) {
+                board[row * 3 + col] = currentPlayer;
+                cell.textContent = currentPlayer;
 
+                if (checkWinner()) {
+                    document.getElementById('message').textContent = `${currentPlayer} wins!`;
+                } else if (board.every(cell => cell !== '')) {
+                    document.getElementById('message').textContent = "It's a tie!";
+                } else {
+                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                }
+            }
+        }
+
+        function checkWinner() {
+            return winCombinations.some(combination => {
+                const [a, b, c] = combination;
+                return board[a] && board[a] === board[b] && board[a] === board[c];
+            });
+        }
+    </script>
 </body>
 </html>
