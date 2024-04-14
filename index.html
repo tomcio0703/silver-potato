@@ -1,168 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Henrys Barthel Tik Tak Toes Game</title>
-    <style>
-        body {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: black;
-            color: lime;
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
-        }
-
-        .scene {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-        }
-
-        .quote {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 20px;
-            white-space: nowrap;
-            animation: spin 20s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotateY(0); }
-            100% { transform: translate(-50%, -50%) rotateY(360deg); }
-        }
-
-        .numbers-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .number {
-            position: absolute;
-            color: lime;
-            font-size: 20px;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-100vh) rotateZ(0); opacity: 0; }
-            100% { transform: translateY(100vh) rotateZ(360deg); opacity: 1; }
-        }
-
-        .tic-tac-toe {
-            display: inline-block;
-            margin-top: 20px;
-            border: 2px solid lime; /* Highlighting the Tic Tac Toe game */
-            padding: 10px;
-            border-radius: 10px;
-        }
-
-        .row::after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        .cell {
-            width: 100px;
-            height: 100px;
-            float: left;
-            border: 1px solid #333;
-            box-sizing: border-box;
-            cursor: pointer;
-            font-size: 3em;
-            line-height: 100px;
-            text-align: center;
-        }
-
-        .cell:hover {
-            background-color: #f0f0f0;
-        }
-
-        .message {
-            margin-top: 20px;
-            font-size: 1.5em;
-        }
-    </style>
-</head>
-<body>
-    <div class="scene">
-        <div class="quote">"The stronger you become, the easier life is." - Andrew Tate</div>
-        <div class="quote">"The more you improve your life, the more you can help others." - Andrew Tate</div>
-        <div class="quote">"Always strive to be the best. Never be content with mediocrity." - Andrew Tate</div>
-        <div class="quote">"Success is the result of constantly seeking improvement." - Andrew Tate</div>
-        <div class="quote">"Winners focus on winning, losers focus on winners." - Andrew Tate</div>
-    </div>
-    <div class="numbers-container"></div>
-
-    <div class="tic-tac-toe" id="board">
-        <h1>Henrys Barthel Tik Tak Toes Game</h1>
-        <div class="row">
-            <div class="cell" onclick="makeMove(0, 0)" id="cell-0"></div>
-            <div class="cell" onclick="makeMove(0, 1)" id="cell-1"></div>
-            <div class="cell" onclick="makeMove(0, 2)" id="cell-2"></div>
-        </div>
-        <div class="row">
-            <div class="cell" onclick="makeMove(1, 0)" id="cell-3"></div>
-            <div class="cell" onclick="makeMove(1, 1)" id="cell-4"></div>
-            <div class="cell" onclick="makeMove(1, 2)" id="cell-5"></div>
-        </div>
-        <div class="row">
-            <div class="cell" onclick="makeMove(2, 0)" id="cell-6"></div>
-            <div class="cell" onclick="makeMove(2, 1)" id="cell-7"></div>
-            <div class="cell" onclick="makeMove(2, 2)" id="cell-8"></div>
-        </div>
-        <div class="message" id="message"></div>
-    </div>
-
-    <script>
-        let currentPlayer = 'X';
-        let board = ['', '', '', '', '', '', '', '', ''];
-        const winCombinations = [
-            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-            [0, 4, 8], [2, 4, 6] // Diagonals
-        ];
-
-        function makeMove(row, col) {
-            const cellId = `cell-${row * 3 + col}`;
-            const cell = document.getElementById(cellId);
-
-            if (board[row * 3 + col] === '' && !checkWinner()) {
-                board[row * 3 + col] = currentPlayer;
-                cell.textContent = currentPlayer;
-                cell.style.color = currentPlayer === 'X' ? 'lime' : 'cyan'; // Change color based on player
-
-                if (checkWinner()) {
-                    document.getElementById('message').textContent = `${currentPlayer} wins!`;
-                } else if (board.every(cell => cell !== '')) {
-                    document.getElementById('message').textContent = "It's a tie!";
-                } else {
-                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-                }
-            }
-        }
-
-        function checkWinner() {
-            return winCombinations.some(combination => {
-                const [a, b, c] = combination;
-                return board[a] && board[a] === board[b] && board[a] === board[c];
-            });
-        }
-    </script>
-</body>
+<html>
+	<head>
+		<title>Dating Site</title>
+		<style type="text/css" rel="stylesheet">
+			fieldset {
+				background-color: lightyellow;
+				border: 10px solid yellow;
+				margin-bottom: 10px;
+				width:720px;
+			}
+			label {
+				width: 180px;
+				display: inline-block;
+				text-align: right;
+				vertical-align: top;
+				margin-bottom: 10px;
+			}
+			.options {
+				width:auto;
+			}
+			.range-low, .range-high {
+				text-align: center;
+				color: white;
+				display: inline-block;
+				width:60px;
+				vertical-align: top;
+			}
+			.range-low {
+				background-color: red;
+			}
+			.range-high {
+				background-color: blue;
+			}
+			textarea {
+				width: 360px;
+				height:	50px;
+			}
+			label:hover, input:hover {
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Please Enter Your Details for Our Dating Website!</h1>
+		<form action="https://ihome.ust.hk/~rossiter/cgi-bin/show_everything.php" enctype="multipart/form-data" method="post">
+			<fieldset>
+				<legend>Your Face</legend>
+					<label for="your-image">Your Image:</label><input type="file" required><br />
+					<label for="image-preview">Image Preview:</label><img src="" id="preview"><br />
+			</fieldset>
+			<fieldset>
+				<legend>Your General Details</legend>
+				<label for="name">Name:</label>			<input type="text" name="name" placeholder="Your full name" required><br />
+				<label for="gender">Gender:</label>		<input type="radio" name="gender" value="male" required><label for="gender-male" class="options">Male</label><input type="radio" name="gender" value="female"><label for="gender-female" class="options">Female</label><br />
+				<label for="age">Age:</label>			<input type="number" name="age" required><br />
+				<label for="dob">Date of birth:</label>		<input type="date" name="dob"><br />
+				<label for="fav-color">Favorite color:</label>	<input type="color" name="fav-color" value="#000000"><br />
+				<label for="country">Which country:</label>
+					<select name="country">
+						<option value="no-selection">no selection</option>
+						<option value="ID">Indonesia</option>
+						<option value="IN">India</option>
+						<option value="MY">Malaysia</option>
+						<option value="UK">United Kingdom</option>
+						<option value="US">United States</option>
+					</select>
+			</fieldset>
+			<fieldset>
+				<legend>Your Indicators</legend>
+				<label for="height">Height:</label>
+					<div class="range-low" >Short</div><input type="range" name="height" min="0" max="100"><div class="range-high">Tall</div><br />
+				<label for="salary">Salary:</label>
+					<div class="range-low">Poor</div><input type="range" name="height" min="0" max="100"><div class="range-high">Rich</div>
+			</fieldset>
+			<fieldset>
+				<legend>Your Contact Information</legend>
+				<label for="email">Email:</label><input type="email" name="email" required><br />
+				<label for="mobile">Mobile:</label><input type="tel" name="mobile"><br />
+				<label for="address">Address:</label><textarea name="address"></textarea><br />
+				<label for="method-to-contact">Method to contact you:</label>
+					<input type="checkbox">
+						<label class="options" for="contact-email">Email</label>
+					<input type="checkbox">
+						<label class="options" for="contact-whatsapp">WhatsApp</label>
+					<input type="checkbox">
+						<label  class="options"for="contact-in-app-chat">In-app chat</label>
+			</fieldset>
+			<input type="submit">
+		</form>
+		<script src="https://www.cse.ust.hk/~rossiter/dating_web_site.js"></script>
+	</body>
 </html>
