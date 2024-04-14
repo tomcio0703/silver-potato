@@ -1,9 +1,9 @@
-#<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacker Scene</title>
+    <title>Henrys Barthel Tik Tak Toes Game</title>
     <style>
         body {
             font-family: 'Courier New', Courier, monospace;
@@ -62,6 +62,41 @@
             0% { transform: translateY(-100vh) rotateZ(0); opacity: 0; }
             100% { transform: translateY(100vh) rotateZ(360deg); opacity: 1; }
         }
+
+        .tic-tac-toe {
+            display: inline-block;
+            margin-top: 20px;
+            border: 2px solid lime; /* Highlighting the Tic Tac Toe game */
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .row::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            float: left;
+            border: 1px solid #333;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-size: 3em;
+            line-height: 100px;
+            text-align: center;
+        }
+
+        .cell:hover {
+            background-color: #f0f0f0;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
     </style>
 </head>
 <body>
@@ -74,20 +109,60 @@
     </div>
     <div class="numbers-container"></div>
 
+    <div class="tic-tac-toe" id="board">
+        <h1>Henrys Barthel Tik Tak Toes Game</h1>
+        <div class="row">
+            <div class="cell" onclick="makeMove(0, 0)" id="cell-0"></div>
+            <div class="cell" onclick="makeMove(0, 1)" id="cell-1"></div>
+            <div class="cell" onclick="makeMove(0, 2)" id="cell-2"></div>
+        </div>
+        <div class="row">
+            <div class="cell" onclick="makeMove(1, 0)" id="cell-3"></div>
+            <div class="cell" onclick="makeMove(1, 1)" id="cell-4"></div>
+            <div class="cell" onclick="makeMove(1, 2)" id="cell-5"></div>
+        </div>
+        <div class="row">
+            <div class="cell" onclick="makeMove(2, 0)" id="cell-6"></div>
+            <div class="cell" onclick="makeMove(2, 1)" id="cell-7"></div>
+            <div class="cell" onclick="makeMove(2, 2)" id="cell-8"></div>
+        </div>
+        <div class="message" id="message"></div>
+    </div>
+
     <script>
-        function createNumber() {
-            const number = document.createElement('div');
-            number.classList.add('number');
-            number.textContent = Math.floor(Math.random() * 10); // Random number between 0 and 9
-            number.style.left = `${Math.random() * 100}vw`;
-            number.style.animationDuration = `${Math.random() * 3 + 2}s`; // Random falling speed
-            document.querySelector('.numbers-container').appendChild(number);
-            setTimeout(() => {
-                number.remove(); // Remove the number element after animation ends
-            }, 5000); // Adjust based on animation duration
+        let currentPlayer = 'X';
+        let board = ['', '', '', '', '', '', '', '', ''];
+        const winCombinations = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+            [0, 4, 8], [2, 4, 6] // Diagonals
+        ];
+
+        function makeMove(row, col) {
+            const cellId = `cell-${row * 3 + col}`;
+            const cell = document.getElementById(cellId);
+
+            if (board[row * 3 + col] === '' && !checkWinner()) {
+                board[row * 3 + col] = currentPlayer;
+                cell.textContent = currentPlayer;
+                cell.style.color = currentPlayer === 'X' ? 'lime' : 'cyan'; // Change color based on player
+
+                if (checkWinner()) {
+                    document.getElementById('message').textContent = `${currentPlayer} wins!`;
+                } else if (board.every(cell => cell !== '')) {
+                    document.getElementById('message').textContent = "It's a tie!";
+                } else {
+                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                }
+            }
         }
 
-        setInterval(createNumber, 300); // Adjust the interval for falling numbers
+        function checkWinner() {
+            return winCombinations.some(combination => {
+                const [a, b, c] = combination;
+                return board[a] && board[a] === board[b] && board[a] === board[c];
+            });
+        }
     </script>
 </body>
 </html>
