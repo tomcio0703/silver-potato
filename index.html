@@ -54,30 +54,62 @@
 
         .field {
             position: absolute;
-            width: 100%;
+            width: 50%;
             height: 50%;
-            border-bottom: 1px solid green;
             box-sizing: border-box;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
         }
 
-        .field:hover {
-            background-color: rgba(0, 255, 0, 0.1);
+        .not-fired {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+
+        .fired {
+            background-color: #f44336; /* Red */
+            color: white;
+        }
+
+        .selector {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: yellow;
+            border-radius: 50%;
+            transform-origin: center;
+            animation: spin 5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translateY(-50%) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-50%) rotate(360deg);
+            }
         }
     </style>
 </head>
 <body>
     <!-- Lucky Wheel -->
     <div class="lucky-wheel">
-        <div class="field" style="transform: rotate(0deg);" onclick="spinWheel('Fired')">Fired</div>
-        <div class="field" style="transform: rotate(180deg);" onclick="spinWheel('Not Fired')">Not Fired</div>
+        <!-- Fields for "Not Fired" -->
+        <div class="field not-fired" style="transform: rotate(0deg);">Not Fired</div>
+        <div class="field not-fired" style="transform: rotate(11.25deg);">Not Fired</div>
+        <!-- Repeat for other "Not Fired" fields -->
+        
+        <!-- Fields for "Fired" -->
+        <div class="field fired" style="transform: rotate(180deg);">Fired</div>
+        <div class="field fired" style="transform: rotate(191.25deg);">Fired</div>
+        <!-- Repeat for other "Fired" fields -->
+        
+        <!-- Selector -->
+        <div class="selector"></div>
     </div>
 
     <!-- Falling Numbers -->
@@ -104,9 +136,13 @@
         // Call the function when the page loads
         window.onload = createFallingNumbers;
 
-        // Function to spin the wheel
-        function spinWheel(result) {
-            alert("The result is: " + result);
+        // Function to spin the wheel and display the result
+        function spinWheel() {
+            const fields = document.querySelectorAll('.field');
+            const selector = document.querySelector('.selector');
+            const result = Math.floor(Math.random() * fields.length);
+            const resultField = fields[result].textContent;
+            alert("The result is: " + resultField);
         }
     </script>
 </body>
