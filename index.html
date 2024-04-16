@@ -39,9 +39,47 @@
                 transform: translateY(100vh); /* Adjust to fall until the bottom of the viewport */
             }
         }
+
+        .lucky-wheel {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border: 2px solid green;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .field {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            border-bottom: 1px solid green;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .field:hover {
+            background-color: rgba(0, 255, 0, 0.1);
+        }
     </style>
 </head>
 <body>
+    <!-- Lucky Wheel -->
+    <div class="lucky-wheel">
+        <div class="field" style="transform: rotate(0deg);" onclick="spinWheel('Fired')">Fired</div>
+        <div class="field" style="transform: rotate(180deg);" onclick="spinWheel('Not Fired')">Not Fired</div>
+    </div>
+
     <!-- Falling Numbers -->
     <div class="matrix">
         <!-- Generate falling numbers dynamically using JavaScript -->
@@ -65,6 +103,11 @@
 
         // Call the function when the page loads
         window.onload = createFallingNumbers;
+
+        // Function to spin the wheel
+        function spinWheel(result) {
+            alert("The result is: " + result);
+        }
     </script>
 </body>
 </html>
