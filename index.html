@@ -1,135 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacker Matrix</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FIRED OR NOT</title>
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            margin: 0;
+        * {
             padding: 0;
-            overflow: hidden; /* Prevent scrollbars */
-            background-color: black; /* Set background color to black */
-            font-family: monospace; /* Monospace font for the matrix vibe */
-            color: green; /* Color of falling numbers */
-            text-shadow: 0 0 5px green; /* Add a subtle glow effect */
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
         }
-
-        .matrix {
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #c3a3f1, #6414e9);
+        }
+        .wrapper {
+            width: 90%;
+            max-width: 34.37em;
+            max-height: 90vh;
+            background-color: #ffffff;
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Prevent interaction with falling numbers */
-            z-index: -1; /* Place behind other content */
-        }
-
-        .number {
-            position: absolute;
-            font-size: 16px; /* Adjust font size as needed */
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-100%);
-            }
-            100% {
-                transform: translateY(100vh); /* Adjust to fall until the bottom of the viewport */
-            }
-        }
-
-        .lucky-wheel {
-            position: absolute;
+            transform: translate(-50%, -50%);
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
-            border: 2px solid green;
-            border-radius: 50%;
-            overflow: hidden;
+            padding: 3em;
+            border-radius: 1em;
+            box-shadow: 0 4em 5em rgba(27, 8, 53, 0.2);
         }
-
-        .wheel {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .container {
+            position: relative;
             width: 100%;
             height: 100%;
-            border-radius: 50%;
-            background-color: transparent;
-            animation: spin 5s linear infinite;
-            transform-origin: 50% 50%;
         }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
+        #wheel {
+            max-height: inherit;
+            width: inherit;
+            top: 0;
+            padding: 0;
+        }
+        @keyframes rotate {
             100% {
                 transform: rotate(360deg);
             }
         }
-
-        .start-button {
+        #spin-btn {
             position: absolute;
-            bottom: 20px;
+            transform: translate(-50%, -50%);
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: green;
-            color: white;
-            border: none;
-            border-radius: 5px;
+            height: 26%;
+            width: 26%;
+            border-radius: 50%;
             cursor: pointer;
-            outline: none;
+            border: 0;
+            background: radial-gradient(#fdcf3b 50%, #d88a40 85%);
+            color: #c66e16;
+            text-transform: uppercase;
+            font-size: 1.8em;
+            letter-spacing: 0.1em;
+            font-weight: 600;
         }
-
-        .start-button:hover {
-            background-color: darkgreen;
+        img {
+            position: absolute;
+            width: 4em;
+            top: 45%;
+            right: -8%;
+        }
+        #final-value {
+            font-size: 1.5em;
+            text-align: center;
+            margin-top: 1.5em;
+            color: #202020;
+            font-weight: 500;
+        }
+        @media screen and (max-width: 768px) {
+            .wrapper {
+                font-size: 12px;
+            }
+            img {
+                right: -5%;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Lucky Wheel -->
-    <div class="lucky-wheel">
-        <div class="wheel"></div>
+    <div class="wrapper">
+        <div class="container">
+            <canvas id="wheel"></canvas>
+            <button id="spin-btn">Spin</button>
+            <img src="https://cutewallpaper.org/24/yellow-arrow-png/155564497.jpg" alt="spinner arrow" />
+        </div>
+        <div id="final-value">
+            <p>Click On The Spin Button To Start</p>
+        </div>
     </div>
-
-    <!-- Falling Numbers -->
-    <div class="matrix">
-        <!-- Generate falling numbers dynamically using JavaScript -->
-    </div>
-
-    <button class="start-button" onclick="spinWheel()">Start</button>
 
     <script>
-        // Function to generate and animate falling numbers
-        function createFallingNumbers() {
-            const matrix = document.querySelector('.matrix');
-            const numCount = 100; // Number of falling numbers
-
-            for (let i = 0; i < numCount; i++) {
-                const num = document.createElement('div');
-                num.textContent = Math.floor(Math.random() * 10); // Generate random numbers
-                num.classList.add('number');
-                num.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
-                num.style.animationDuration = Math.random() * 3 + 2 + 's'; // Random falling speed
-                matrix.appendChild(num);
+        const wheel = document.getElementById("wheel");
+        const spinBtn = document.getElementById("spin-btn");
+        const finalValue = document.getElementById("final-value");
+        //Object that stores values of minimum and maximum angle for a value
+        const rotationValues = [
+            { minDegree: 0, maxDegree: 30, value: 2 },
+            { minDegree: 31, maxDegree: 90, value: 1 },
+            { minDegree: 91, maxDegree: 150, value: 6 },
+            { minDegree: 151, maxDegree: 210, value: 5 },
+            { minDegree: 211, maxDegree: 270, value: 4 },
+            { minDegree: 271, maxDegree: 330, value: 3 },
+            { minDegree: 331, maxDegree: 360, value: 2 },
+        ];
+        //Size of each piece
+        const data = [16, 16, 16, 16, 16, 16];
+        //background color for each piece
+        var pieColors = [
+            "#8b35bc",
+            "#b163da",
+            "#8b35bc",
+            "#b163da",
+            "#8b35bc",
+            "#b163da",
+        ];
+        //Create chart
+        let myChart = new Chart(wheel, {
+            //Plugin for displaying text on pie chart
+            plugins: [ChartDataLabels],
+            //Chart Type Pie
+            type: "pie",
+            data: {
+                //Labels(values which are to be displayed on chart)
+                labels: [1, 2, 3, 4, 5, 6],
+                //Settings for dataset/pie
+                datasets: [
+                    {
+                        backgroundColor: pieColors,
+                        data: data,
+                    },
+                ],
+            },
+            options: {
+                //Responsive chart
+                responsive: true,
+                animation: { duration: 0 },
+                plugins: {
+                    //hide tooltip and legend
+                    tooltip: false,
+                    legend: {
+                        display: false,
+                    },
+                    //display labels inside pie chart
+                    datalabels: {
+                        color: "#ffffff",
+                        formatter: (_, context) => context.chart.data.labels[context.dataIndex],
+                        font: { size: 24 },
+                    },
+                },
+            },
+        });
+        //display value based on the randomAngle
+        const valueGenerator = (angleValue) => {
+            for (let i of rotationValues) {
+                //if the angleValue is between min and max then display it
+                if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
+                    finalValue.innerHTML = `<p>Value: ${i.value}</p>`;
+                    spinBtn.disabled = false;
+                    break;
+                }
             }
-        }
-
-        // Call the function when the page loads
-        window.onload = createFallingNumbers;
-
-        // Function to spin the wheel
-        function spinWheel() {
-            const wheel = document.querySelector('.wheel');
-            wheel.style.animation = 'spin 5s linear infinite';
-        }
+        };
+        //Spinner count
+        let count = 0;
+        //100 rotations for animation and last rotation for result
+        let resultValue = 101;
+        //Start spinning
+        spinBtn.addEventListener("click", () => {
+            spinBtn.disabled = true;
+            //Empty final value
+            finalValue.innerHTML = `<p>Good Luck!</p>`;
+            //Generate random degrees to stop at
+            let randomDegree = Math.floor(Math.random() * (355 - 0 + 1) + 0);
+            //Interval for rotation animation
+            let rotationInterval = window.setInterval(() => {
+                //Set rotation for piechart
+                /*
+                Initially to make the piechart rotate faster we set resultValue to 101 so it rotates 101 degrees at a time and this reduces by 1 with every count. Eventually on last rotation we rotate by 1 degree at a time.
+                */
+                myChart.options.rotation = myChart.options.rotation + resultValue;
+                //Update chart with new value;
+                myChart.update();
+                //If rotation>360 reset it back to 0
+                if (myChart.options.rotation >= 360) {
+                    count += 1;
+                    resultValue -= 5;
+                    myChart.options.rotation = 0;
+                } else if (count > 15 && myChart.options.rotation == randomDegree) {
+                    valueGenerator(randomDegree);
+                    clearInterval(rotationInterval);
+                    count = 0;
+                    resultValue = 101;
+                }
+            }, 10);
+        });
     </script>
 </body>
 </html>
