@@ -52,70 +52,59 @@
             overflow: hidden;
         }
 
-        .field {
+        .wheel {
             position: absolute;
-            width: 50%;
-            height: 50%;
-            box-sizing: border-box;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .not-fired {
-            background-color: #4CAF50; /* Green */
-            color: white;
-        }
-
-        .fired {
-            background-color: #f44336; /* Red */
-            color: white;
-        }
-
-        .selector {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: yellow;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            transform-origin: center;
+            background-color: transparent;
             animation: spin 5s linear infinite;
+            transform-origin: 50% 50%;
         }
 
         @keyframes spin {
             0% {
-                transform: translateY(-50%) rotate(0deg);
+                transform: rotate(0deg);
             }
             100% {
-                transform: translateY(-50%) rotate(360deg);
+                transform: rotate(360deg);
             }
+        }
+
+        .start-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .start-button:hover {
+            background-color: darkgreen;
         }
     </style>
 </head>
 <body>
     <!-- Lucky Wheel -->
     <div class="lucky-wheel">
-        <!-- Fields for "Not Fired" -->
-        <div class="field not-fired" style="transform: rotate(0deg);">Not Fired</div>
-        <div class="field not-fired" style="transform: rotate(11.25deg);">Not Fired</div>
-        <!-- Repeat for other "Not Fired" fields -->
-        
-        <!-- Fields for "Fired" -->
-        <div class="field fired" style="transform: rotate(180deg);">Fired</div>
-        <div class="field fired" style="transform: rotate(191.25deg);">Fired</div>
-        <!-- Repeat for other "Fired" fields -->
-        
-        <!-- Selector -->
-        <div class="selector"></div>
+        <div class="wheel"></div>
     </div>
 
     <!-- Falling Numbers -->
     <div class="matrix">
         <!-- Generate falling numbers dynamically using JavaScript -->
     </div>
+
+    <button class="start-button" onclick="spinWheel()">Start</button>
 
     <script>
         // Function to generate and animate falling numbers
@@ -136,13 +125,10 @@
         // Call the function when the page loads
         window.onload = createFallingNumbers;
 
-        // Function to spin the wheel and display the result
+        // Function to spin the wheel
         function spinWheel() {
-            const fields = document.querySelectorAll('.field');
-            const selector = document.querySelector('.selector');
-            const result = Math.floor(Math.random() * fields.length);
-            const resultField = fields[result].textContent;
-            alert("The result is: " + resultField);
+            const wheel = document.querySelector('.wheel');
+            wheel.style.animation = 'spin 5s linear infinite';
         }
     </script>
 </body>
