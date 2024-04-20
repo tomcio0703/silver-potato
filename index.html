@@ -9,22 +9,18 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-image: url('yellow-black-handy-tools-pilers-screwdriver-isolated-yellow-background_255667-7157.jpeg'); /* Background image of handyman tools */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-        }
-        .container {
-            max-width: 600px;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            flex-direction: column;
         }
         h1 {
-            color: #333;
+            color: blue;
+            text-align: center;
             margin-bottom: 20px;
         }
         .button-container {
@@ -36,7 +32,7 @@
             margin: 10px;
             padding: 15px 30px;
             font-size: 18px;
-            background-color: #007bff;
+            background-color: blue;
             border: none;
             color: white;
             cursor: pointer;
@@ -44,52 +40,29 @@
             transition: background-color 0.3s;
         }
         .button:hover {
-            background-color: #0056b3;
+            background-color: darkblue;
         }
-        .symbol {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            line-height: 50px;
-            font-size: 24px;
-            background-color: #007bff;
-            color: white;
-            border-radius: 50%;
-            margin: 10px;
+        .button span {
+            margin-left: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Handyman Services</h1>
-        <div class="button-container">
-            <button class="button" onclick="window.location.href='plumbing.html'">Plumbing</button>
-            <button class="button" onclick="window.location.href='electrical.html'">Electrical work</button>
-            <button class="button" onclick="window.location.href='painting.html'">Painting</button>
-            <button class="button" onclick="window.location.href='drywall.html'">Drywall repair</button>
-            <button class="button" onclick="window.location.href='appliance.html'">Appliance installation and repair</button>
-            <button class="button" onclick="window.location.href='furniture.html'">Furniture assembly</button>
-            <button class="button" onclick="window.location.href='flooring.html'">Flooring installation and repair</button>
-            <button class="button" onclick="window.location.href='locksmith.html'">Locksmith services</button>
-            <button class="button" onclick="window.location.href='landscaping.html'">Landscaping and gardening maintenance</button>
-            <button class="button" onclick="window.location.href='tile.html'">Tile Installation and Repair</button>
-            <button class="button" onclick="window.location.href='moving.html'">Moving Transport</button>
-            <button class="button" onclick="window.location.href='other.html'">Other</button>
-        </div>
-        <div class="button-container">
-            <div class="symbol">🔧</div>
-            <div class="symbol">⚡</div>
-            <div class="symbol">🎨</div>
-            <div class="symbol">🔨</div>
-            <div class="symbol">🔌</div>
-            <div class="symbol">🛋️</div>
-            <div class="symbol">🏠</div>
-            <div class="symbol">🔒</div>
-            <div class="symbol">🌳</div>
-            <div class="symbol">🛠️</div>
-            <div class="symbol">🚚</div>
-            <div class="symbol">🛒</div>
-        </div>
+    <h1>Welcome to Handyman Services</h1>
+    <div class="button-container">
+        <button class="button" onclick="window.location.href='plumbing.html'">🔧 <span>Plumbing</span></button>
+        <button class="button" onclick="window.location.href='electrical.html'">⚡ <span>Electrical work</span></button>
+        <button class="button" onclick="window.location.href='painting.html'">🎨 <span>Painting</span></button>
+        <button class="button" onclick="window.location.href='drywall.html'">🔨 <span>Drywall repair</span></button>
+        <button class="button" onclick="window.location.href='appliance.html'">🔌 <span>Appliance installation and repair</span></button>
+        <button class="button" onclick="window.location.href='furniture.html'">🛋️ <span>Furniture assembly</span></button>
+        <button class="button" onclick="window.location.href='flooring.html'">🏠 <span>Flooring installation and repair</span></button>
+        <button class="button" onclick="window.location.href='locksmith.html'">🔒 <span>Locksmith services</span></button>
+        <button class="button" onclick="window.location.href='landscaping.html'">🌳 <span>Landscaping and gardening maintenance</span></button>
+        <button class="button" onclick="window.location.href='tile.html'">🛠️ <span>Tile Installation and Repair</span></button>
+        <button class="button" onclick="window.location.href='moving.html'">🚚 <span>Moving Transport</span></button>
+        <button class="button" onclick="window.location.href='other.html'">🛒 <span>Other</span></button>
     </div>
 </body>
 </html>
+
