@@ -13,12 +13,17 @@
   }
   .hacking-numbers {
     position: absolute;
-    top: -50px;
+    top: 0;
     left: 0;
     width: 100%;
+    height: 100%;
     font-size: 20px;
     line-height: 1;
-    animation: falling 5s linear infinite;
+    pointer-events: none;
+  }
+  .hacking-number {
+    position: absolute;
+    animation: falling 5s linear infinite, glowing 1s ease-in-out infinite alternate;
   }
   @keyframes falling {
     from {
@@ -28,20 +33,28 @@
       transform: translateY(100vh);
     }
   }
+  @keyframes glowing {
+    from {
+      text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
+    }
+    to {
+      text-shadow: 0 0 20px #0f0, 0 0 40px #0f0, 0 0 60px #0f0;
+    }
+  }
 </style>
 </head>
 <body>
 <div class="hacking-numbers">
   <!-- You can replace these with actual numbers -->
-  01001000<br>
-  01000001<br>
-  01000011<br>
-  01001011<br>
-  01000101<br>
-  01010010<br>
-  01001101<br>
-  01000001<br>
-  01001110<br>
+  <span class="hacking-number" style="top: 0; left: 5%;">01001000</span>
+  <span class="hacking-number" style="top: 20%; left: 15%;">01000001</span>
+  <span class="hacking-number" style="top: 50%; left: 30%;">01000011</span>
+  <span class="hacking-number" style="top: 70%; left: 50%;">01001011</span>
+  <span class="hacking-number" style="top: 10%; left: 70%;">01000101</span>
+  <span class="hacking-number" style="top: 40%; left: 85%;">01010010</span>
+  <span class="hacking-number" style="top: 90%; left: 20%;">01001101</span>
+  <span class="hacking-number" style="top: 30%; left: 60%;">01000001</span>
+  <span class="hacking-number" style="top: 80%; left: 40%;">01001110</span>
 </div>
 </body>
 </html>
