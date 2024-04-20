@@ -2,21 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Handyman Services</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-image: url(1000_F_160849704_PWD0sLajJjLYn1S8cki9VRNPaJ2GSmBh.jpeg); /* Background image of handyman tools */
+            background-image: url('yellow-black-handy-tools-pilers-screwdriver-isolated-yellow-background_255667-7157.jpeg'); /* Background image of handyman tools */
             background-size: cover;
             background-position: center;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            overflow-x: hidden; /* Hide horizontal scroll */
         }
         h1 {
             color: blue;
@@ -27,6 +28,8 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            max-width: 90vw; /* Limit width to 90% of viewport width */
+            overflow: hidden; /* Hide overflow on small screens */
         }
         .button {
             margin: 10px;
@@ -38,6 +41,7 @@
             cursor: pointer;
             border-radius: 5px;
             transition: background-color 0.3s;
+            white-space: nowrap; /* Prevent button text from wrapping */
         }
         .button:hover {
             background-color: darkblue;
@@ -65,4 +69,3 @@
     </div>
 </body>
 </html>
-
