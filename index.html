@@ -1,53 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tomcio's way to sucess</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hacking Simulation</title>
+<style>
+  body {
+    background-color: #000;
+    color: #0f0;
+    font-family: monospace;
+    overflow: hidden;
+  }
+  .hacking-numbers {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    font-size: 20px;
+    line-height: 1;
+    animation: falling 5s linear infinite;
+  }
+  @keyframes falling {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(100vh);
+    }
+  }
+</style>
 </head>
 <body>
-    <h1>Tomcio's way to sucess</h1>
-    <form id="cvForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br><br>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
-        
-        <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone" required><br><br>
-        
-        <label for="experience">Experience:</label>
-        <textarea id="experience" name="experience" required></textarea><br><br>
-        
-        <label for="education">Education:</label>
-        <textarea id="education" name="education" required></textarea><br><br>
-        
-        <button type="button" onclick="generateCV()">Generate CV</button>
-    </form>
-    
-    <div id="cvPreview"></div>
-    
-    <script>
-        function generateCV() {
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const phone = document.getElementById("phone").value;
-            const experience = document.getElementById("experience").value;
-            const education = document.getElementById("education").value;
-
-            const cvTemplate = `
-                <h2>${name}</h2>
-                <p>Email: ${email}</p>
-                <p>Phone: ${phone}</p>
-                <h3>Experience</h3>
-                <p>${experience}</p>
-                <h3>Education</h3>
-                <p>${education}</p>
-            `;
-
-            document.getElementById("cvPreview").innerHTML = cvTemplate;
-        }
-    </script>
+<div class="hacking-numbers">
+  <!-- You can replace these with actual numbers -->
+  01001000<br>
+  01000001<br>
+  01000011<br>
+  01001011<br>
+  01000101<br>
+  01010010<br>
+  01001101<br>
+  01000001<br>
+  01001110<br>
+</div>
 </body>
 </html>
